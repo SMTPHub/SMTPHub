@@ -1,0 +1,13 @@
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+.DS_Store
+MP_verify_*.txt
+install.lock
+*config.php*
+test/*
