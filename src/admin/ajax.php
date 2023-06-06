@@ -37,6 +37,7 @@ switch ($act) {
         break;
     case 'set':
         // 修改配置
+        if (SYSTEM_MODE == 'demo') exit('{"code":-1,"msg":"演示模式，禁止修改此项 ！"}');
         if (isset($_POST['green_label_porn'])) {
             $_POST['green_label_porn'] = implode(',', $_POST['green_label_porn']);
         }
@@ -50,6 +51,7 @@ switch ($act) {
         break;
     case 'password':
         // 修改密码
+        if (SYSTEM_MODE == 'demo') exit('{"code":-1,"msg":"演示模式，禁止修改此项 ！"}');
         $admin_user = isset($_POST['admin_user']) ? trim($_POST['admin_user']) : '';
         $admin_pwd  = isset($_POST['admin_pwd'])  ? trim($_POST['admin_pwd']) : '';
         $newpwd     = isset($_POST['newpwd'])     ? trim($_POST['newpwd']) : '';

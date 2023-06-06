@@ -6,6 +6,7 @@
 
 if (defined('IN_CRONLITE')) return;
 define('IN_CRONLITE', true);
+define('SYSTEM_MODE', 'demo');
 define('SYSTEM_ROOT', dirname(__FILE__));
 define('ROOT', dirname(SYSTEM_ROOT));
 define('APP_VERSION', '1.0.0');
