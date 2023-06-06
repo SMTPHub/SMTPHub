@@ -19,7 +19,7 @@ CREATE TABLE `pre_app` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `app_type` tinyint(1) NOT NULL COMMENT '应用类型',
   `app_name` varchar(128) NOT NULL COMMENT '应用名称',
-  `app_from_name` varchar(32) NOT NULL COMMENT '发信人名称',
+  `app_from_name` varchar(32) DEFAULT NULL COMMENT '发信人名称',
   `app_secret` varchar(32) NOT NULL COMMENT '应用密钥',
   `smtp_id` int(11) NOT NULL DEFAULT '0' COMMENT 'SMTP服务ID',
   `addtime` datetime DEFAULT NULL COMMENT '添加时间',

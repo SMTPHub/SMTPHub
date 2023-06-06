@@ -84,7 +84,6 @@ switch ($act) {
         break;
     case 'save':
         $name = trim(daddslashes($_POST['name']));
-        $type = intval($_POST['type']);
         $id = intval(trim($_POST['id']));
         $smtp_host = trim(daddslashes($_POST['smtp_host']));
         $smtp_port = trim(daddslashes($_POST['smtp_port']));
@@ -98,7 +97,6 @@ switch ($act) {
             if ($DB->find('smtp', 'name', ['smtp_username' => $smtp_username])) exit('{"code":-1,"msg":"SMTP账号重复，请勿重复添加"}');
 
             if (!$DB->insert('smtp', [
-                'type' => $type,
                 'name' => $name,
                 'status' => 1,
                 'smtp_host' => $smtp_host,
@@ -117,7 +115,6 @@ switch ($act) {
             if (!$DB->update(
                 'smtp',
                 [
-                    'type' => $type,
                     'name' => $name,
                     'smtp_host' => $smtp_host,
                     'smtp_port' => $smtp_port,
