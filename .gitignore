@@ -7,7 +7,6 @@
 *.sln
 
 .DS_Store
-MP_verify_*.txt
 install.lock
 *config.php*
 test/*
