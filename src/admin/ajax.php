@@ -38,12 +38,6 @@ switch ($act) {
     case 'set':
         // 修改配置
         if (SYSTEM_MODE == 'demo') exit('{"code":-1,"msg":"演示模式，禁止修改此项 ！"}');
-        if (isset($_POST['green_label_porn'])) {
-            $_POST['green_label_porn'] = implode(',', $_POST['green_label_porn']);
-        }
-        if (isset($_POST['green_label_terrorism'])) {
-            $_POST['green_label_terrorism'] = implode(',', $_POST['green_label_terrorism']);
-        }
         foreach ($_POST as $k => $v) {
             saveSetting($k, $v);
         }
