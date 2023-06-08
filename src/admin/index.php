@@ -8,7 +8,7 @@ if ($admin_islogin == 1) {
 ?>
 <?php
 $mysqlversion = $DB->getColumn("select VERSION()");
-$checkupdate = '//auth.cccyun.cc/app/pan.php?ver=' . VERSION;
+$checkupdate = 'https://smtphub.crogram.net/smtphub/update.php?ver=' . VERSION;
 ?>
 <link href="../assets/css/admin.css" rel="stylesheet" />
 <div class="container" style="padding-top:70px;">
