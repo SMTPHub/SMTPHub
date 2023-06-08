@@ -18,22 +18,24 @@ DROP TABLE IF EXISTS `pre_app`;
 CREATE TABLE `pre_app` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'APPID',
   `uid` int(11) NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `smtp_id` int(11) NOT NULL DEFAULT '0' COMMENT 'SMTP服务ID',
   `app_type` tinyint(1) NOT NULL COMMENT '应用类型',
   `app_name` varchar(128) NOT NULL COMMENT '应用名称',
   `app_from_name` varchar(32) DEFAULT NULL COMMENT '发信人名称',
   `app_secret` varchar(32) NOT NULL COMMENT '应用密钥',
-  `smtp_id` int(11) NOT NULL DEFAULT '0' COMMENT 'SMTP服务ID',
   `addtime` datetime NOT NULL COMMENT '添加时间',
   `updatetime` datetime DEFAULT NULL COMMENT '最后更新时间',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态:1启用0关闭',
   PRIMARY KEY (`id`),
   KEY `app_type` (`app_type`),
+  KEY `uid` (`uid`),
   KEY `smtp_id` (`smtp_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `pre_record`;
 CREATE TABLE `pre_record` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL DEFAULT '0' COMMENT '用户UID',
   `appid` int(11) NOT NULL DEFAULT '0',
   `smtp_id` varchar(11) NOT NULL,
   `mail_subject` varchar(50) DEFAULT NULL,
@@ -44,6 +46,7 @@ CREATE TABLE `pre_record` (
   `status` tinyint(1) NOT NULL COMMENT '状态:1成功0失败',
   PRIMARY KEY (`id`),
   KEY `appid` (`appid`),
+  KEY `uid` (`uid`),
   KEY `smtp_id` (`smtp_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
