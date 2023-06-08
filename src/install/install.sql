@@ -16,13 +16,14 @@ INSERT INTO `pre_config` VALUES ('ip_type', '0');
 
 DROP TABLE IF EXISTS `pre_app`;
 CREATE TABLE `pre_app` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'APPID',
+  `uid` int(11) NOT NULL DEFAULT '0' COMMENT '用户ID',
   `app_type` tinyint(1) NOT NULL COMMENT '应用类型',
   `app_name` varchar(128) NOT NULL COMMENT '应用名称',
   `app_from_name` varchar(32) DEFAULT NULL COMMENT '发信人名称',
   `app_secret` varchar(32) NOT NULL COMMENT '应用密钥',
   `smtp_id` int(11) NOT NULL DEFAULT '0' COMMENT 'SMTP服务ID',
-  `addtime` datetime DEFAULT NULL COMMENT '添加时间',
+  `addtime` datetime NOT NULL COMMENT '添加时间',
   `updatetime` datetime DEFAULT NULL COMMENT '最后更新时间',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态:1启用0关闭',
   PRIMARY KEY (`id`),
@@ -48,16 +49,16 @@ CREATE TABLE `pre_record` (
 
 DROP TABLE IF EXISTS `pre_smtp`;
 CREATE TABLE `pre_smtp` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '服务ID',
   `name` varchar(30) NOT NULL,
   `smtp_host` varchar(50) NOT NULL COMMENT 'SMTP服务器',
   `smtp_port` int(5) NOT NULL DEFAULT '25' COMMENT 'SMTP端口',
   `smtp_username` varchar(100) NOT NULL COMMENT 'SMTP账号',
   `smtp_password` varchar(64) DEFAULT '' COMMENT 'SMTP密码',
   `smtp_from` varchar(100) DEFAULT NULL COMMENT 'SMTP回复邮箱',
-  `addtime` datetime DEFAULT NULL,
-  `updatetime` datetime DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态:1启用0关闭',
+  `addtime` datetime NOT NULL COMMENT '添加时间',
+  `updatetime` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`),
   KEY `smtp_host` (`smtp_host`),
   KEY `smtp_username` (`smtp_username`)
