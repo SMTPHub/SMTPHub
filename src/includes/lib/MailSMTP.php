@@ -82,7 +82,7 @@ class MailSMTP
         $header .= "Subject: =?utf-8?B?" . base64_encode($subject) . "?=\r\n";
         $header .= $additional_headers;
         $header .= "Date: " . date("r") . "\r\n";
-        $header .= "X-Mailer: By SMTPHub (PHP/" . phpversion() . ")\r\n";
+        $header .= "X-Mailer: SMTPHub (PHP/" . phpversion() . ")\r\n";
         list($msec, $sec) = explode(" ", microtime());
         $header .= "Message-ID: <" . date("YmdHis", $sec) . "." . ($msec * 1000000) . "." . $mail_from . ">\r\n";
         $TO = explode(",", $this->strip_comment($to));

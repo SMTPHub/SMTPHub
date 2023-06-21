@@ -15,7 +15,7 @@ class SMTPHub
     public function send($to, $subject, $message, $to_name, $from_name)
     {
         if (empty($this->appid) || empty($this->appsecret)) return false;
-        $url = 'https://smtphub.yourdomain.com/api.php';
+        $url = 'http://smtphub.company.com/api.php';
         $data = array(
             'appid' => $this->appid,
             'appsecret' => $this->appsecret,

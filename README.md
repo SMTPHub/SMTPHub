@@ -38,7 +38,7 @@
 
 接口调用说明
 
-接口 URL：`http://smtphub.yourdomain.com/api.php`
+接口 URL：`http://smtphub.company.com/api.php`
 
 POST 参数说明
 
@@ -47,7 +47,7 @@ POST 参数说明
 | action    | 必须 | send                             | 发送邮件                                                     |
 | appid     | 必须 | 1000                             | 应用ID                                                       |
 | appsecret | 必须 | Cd2DBg2R0JuXgLsrkXb6AfLXV8kW8p4k | 应用密钥                                                     |
-| to        | 必须 | username@qq.com                  | 邮件收件人地址                                               |
+| to        | 必须 | mail@company.com                  | 邮件收件人地址                                               |
 | subject   | 必须 | 网站通知                         | 邮件主题                                                     |
 | message   | 必须 | `<p>您好，感谢您加入会员 ！</p>` | 邮件内容，支持 HTML                                          |
 | to_name   | 可选 | 【网站会员】                     | 收信人名称                                                   |
