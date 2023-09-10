@@ -56,7 +56,7 @@ $title = '帮助文档';
                     <p>1. 系统后台【 SMTP管理】添加 SMTP 服务器配置，依次填写名称，SMTP主机、端口、账号、密码，</p>
                     <p>2. 系统后台【应用管理】添加应用，填写应用名称，应用密钥，服务类别选中上一步添加的 SMTP 服务，点击【保存】，在列表中点击【密钥】得到 APPSECRET，</p>
                     <p>3. 使用如上操作拿到的 APPID 和 APPSECRET 调用接口开始使用。</p>
-                    <p>接口调用说明</p>
+                    <h3>接口调用说明</h3>
                     <p>接口 URL：<code><?php echo $site_url; ?>/api.php</code></p>
                     <p>POST 参数说明</p>
                     <table class="table table-striped table-hover table-bordered">
@@ -126,6 +126,32 @@ $title = '帮助文档';
     "msg": "发送失败"
 }</pre>
                     <p>&nbsp;</p>
+                    <h3>PHP SDK 使用方法：</h3>
+                    <p></p>
+                    <pre>// 导入SDK
+include('SMTPHub.php');
+// 实例
+$SMTP = new \lib\mail\SMTPHub('<?php echo $site_url; ?>/api.php', APPID, APPSECRET);
+// 调用发送接口
+$SMTP->send('接收人邮箱', '主题', '内容', '收信人名字', '发信人名字');
+</pre>
+                    <p>实例</p>
+                    <pre>// 导入SDK
+include('SMTPHub.php');
+// 实例
+$SMTP = new \lib\mail\SMTPHub('<?php echo $site_url; ?>/api.php', '1000', 'Cd2DBg2R0JuXgLsrkXb6AfLXV8kW8p4k');
+// 定义参数
+$to        = 'username@qq.com';
+$to_name   = '接收人名字';
+$subject   = "这是一封测试邮件";
+$message   = "邮件内容";
+$from_name = '发信人名字';
+// 调用发送接口
+$result    = $SMTP->send($to, $subject, $message, $to_name, $from_name);
+// 输出结果，格式与上面的接口调用一致
+@header('Content-Type: application/json; charset=UTF-8');
+echo $result;
+</pre>
                 </div>
             </div>
         </div>
