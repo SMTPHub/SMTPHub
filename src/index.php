@@ -77,7 +77,7 @@ if($conf['homepage']==2){
                 <div class="page-banner-buttons">
                   <a class="btn bg-white" href="./doc.php"><i class="fa fa-book fa-fw"></i> 开发文档</a>
                     <a class="btn bg-white" href="https://github.com/SMTPHub/SMTPHub" target="_blank"><i class="fa fa-github fa-fw"></i> Github</a>
-                    <a class="btn bg-white" href="https://gitee.com/SMTPHub/SMTPHub" target="_blank"><i class="fa fa-github fa-fw"></i> Gitee</a>
+                    <a class="btn bg-white" href="https://gitee.com/SMTPHub/SMTPHub" target="_blank"><i class="fa fa-coffee fa-fw"></i> Gitee</a>
                 </div>
             </div>
             <div class="col-sm-6 d-none d-sm-block">
