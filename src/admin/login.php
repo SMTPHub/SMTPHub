@@ -6,6 +6,7 @@
 $verifycode = 1; //验证码开关
 
 if (!function_exists("imagecreate") || !file_exists('code.php')) $verifycode = 0;
+$mod = 'admin';
 define('IN_ADMIN', true);
 $title = '用户登录';
 include("../includes/common.php");

@@ -1,4 +1,5 @@
 <?php
+$mod = 'api';
 include("./includes/common.php");
 $action = isset($_REQUEST['action']) ? daddslashes($_REQUEST['action']) : null;
 

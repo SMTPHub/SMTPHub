@@ -1,5 +1,6 @@
 <?php
 define('IN_ADMIN', true);
+$mod = 'admin';
 include("../includes/common.php");
 if ($admin_islogin == 1) {
 } else exit("<script language='javascript'>window.location.href='./login.php';</script>");

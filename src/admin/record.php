@@ -1,4 +1,5 @@
 <?php
+$mod = 'admin';
 include("../includes/common.php");
 if ($admin_islogin != 1) exit("<script language='javascript'>window.location.href='./login.php';</script>");
 $title = '发送记录';

@@ -1,4 +1,5 @@
 <?php
+$mod = 'admin';
 include("../includes/common.php");
 $title = '应用管理';
 include './head.php';

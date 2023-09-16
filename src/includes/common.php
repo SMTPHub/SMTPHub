@@ -9,8 +9,8 @@ define('IN_CRONLITE', true);
 define('SYSTEM_MODE', 'prod');
 define('SYSTEM_ROOT', dirname(__FILE__));
 define('ROOT', dirname(SYSTEM_ROOT));
-define('APP_VERSION', '1.0.0');
-define('VERSION', '1000');
+define('APP_VERSION', '1.1.0');
+define('VERSION', '1001');
 define('DB_VERSION', '1001');
 date_default_timezone_set('Asia/Shanghai');
 $date = date("Y-m-d H:i:s");
@@ -78,6 +78,25 @@ if (!$conf['version'] || $conf['version'] < DB_VERSION) {
         echo '请先完成网站升级！<a href="' . $site_url . '/install/update.php"><font color=red>点此升级</font></a>';
         exit;
     }
+}
+
+if ($mod != 'api') {
+    // 非接口模块访问限制
+    if (($conf['qqjump'] == 1 && (is_qq() || is_weixin()))) {
+        $site_uri = $site_url . $_SERVER['REQUEST_URI'];
+        require_once ROOT. '/page/page-browseronly.php';
+        exit(0);
+    }
+}
+
+if ($conf['cdnpublic'] == 1) {
+    $cdnpublic = 'https://lib.baomitu.com/';
+} elseif ($conf['cdnpublic'] == 2) {
+    $cdnpublic = 'https://cdn.bootcdn.net/ajax/libs/';
+} elseif ($conf['cdnpublic'] == 4) {
+    $cdnpublic = 'https://s1.pstatp.com/cdn/expire-1-M/';
+} else {
+    $cdnpublic = 'https://cdn.staticfile.org/';
 }
 
 $clientip = real_ip(isset($conf['ip_type']) ? $conf['ip_type'] : 0);

@@ -4,6 +4,7 @@
  * 系统设置
  **/
 define('IN_ADMIN', true);
+$mod = 'admin';
 include("../includes/common.php");
 $title = '系统设置';
 include './head.php';
@@ -22,7 +23,31 @@ $mod = isset($_GET['mod']) ? $_GET['mod'] : 'site';
                     <form onsubmit="return saveSetting(this)" method="post" class="form-horizontal" role="form">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">网站标题</label>
-                            <div class="col-sm-10"><input type="text" name="title" value="<?php echo $conf['title']; ?>" class="form-control" required /></div>
+                            <div class="col-sm-10">
+                                <input type="text" name="title" value="<?php echo $conf['title']; ?>" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">站点名称</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" name="site_name" required autocomplete="off" value="<?php echo $conf['site_name'] ?>" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">站点LOGO</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" name="site_logo" required autocomplete="off" value="<?php echo $conf['site_logo'] ?>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">公司名称</label>
+                            <div class="col-sm-10"><input type="text" name="orgname" value="<?php echo $conf['orgname']; ?>" class="form-control" /></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">站点ICP备案号</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" name="site_icp" required autocomplete="off" value="<?php echo $conf['site_icp'] ?>">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">关键字</label>
@@ -33,11 +58,79 @@ $mod = isset($_GET['mod']) ? $_GET['mod'] : 'site';
                             <div class="col-sm-10"><input type="text" name="description" value="<?php echo $conf['description']; ?>" class="form-control" /></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">禁止访问IP</label>
-                            <div class="col-sm-10"><textarea class="form-control" name="blackip" rows="2" placeholder="多个IP用|隔开"><?php echo $conf['blackip'] ?></textarea></div>
+                            <label class="col-sm-2 control-label">联系地址</label>
+                            <div class="col-sm-10"><input type="text" name="address" value="<?php echo $conf['address']; ?>" class="form-control" /></div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10"><input type="submit" name="submit" value="修改" class="btn btn-primary form-control" />
+                            <label class="col-sm-2 control-label">联系邮箱</label>
+                            <div class="col-sm-10"><input type="text" name="email" value="<?php echo $conf['email']; ?>" class="form-control" /></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">客服ＱＱ</label>
+                            <div class="col-sm-10"><input type="text" name="kfqq" value="<?php echo $conf['kfqq']; ?>" class="form-control" /></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">ＱＱ群链接</label>
+                            <div class="col-sm-10"><input type="text" name="qqqun" value="<?php echo $conf['qqqun']; ?>" class="form-control" /></div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="col-sm-2 control-label">禁止手机QQ/微信访问</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="qqjump" lay-search lay-filter="qqjump">
+                                    <option <?php echo $conf['qqjump'] == 0 ? 'selected ' : '' ?>value="0">关闭</option>
+                                    <option <?php echo $conf['qqjump'] == 1 ? 'selected ' : '' ?>value="1">开启</option>
+                                </select>
+                                <small>此功能没有任何防红效果，理论上直接在QQ发域名推广都会拦截，建议生成防红链接进行访问</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">公共静态资源CDN</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="cdnpublic" default="<?php echo $conf['cdnpublic'] ?>">
+                                    <option <?php echo $conf['cdnpublic'] == 0 ? 'selected ' : '' ?> value="0">七牛云CDN</option>
+                                    <option <?php echo $conf['cdnpublic'] == 1 ? 'selected ' : '' ?> value="1">360CDN</option>
+                                    <option <?php echo $conf['cdnpublic'] == 2 ? 'selected ' : '' ?> value="2">BootCDN</option>
+                                    <option <?php echo $conf['cdnpublic'] == 4 ? 'selected ' : '' ?> value="4">今日头条CDN</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">首页显示模式</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="homepage" default="<?php echo $conf['homepage'] ?>">
+                                    <option <?php echo $conf['homepage'] == 0 ? 'selected ' : '' ?> value="0">默认显示首页</option>
+                                    <option <?php echo $conf['homepage'] == 1 ? 'selected ' : '' ?> value="1">显示空白首页</option>
+                                    <option <?php echo $conf['homepage'] == 2 ? 'selected ' : '' ?> value="2">显示其它指定网址</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" id="setform4" style="<?php echo $conf['homepage'] != 2 ? 'display:none;' : null; ?>">
+                            <label class="col-sm-2 control-label">显示网址URL</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="homepage_url" value="<?php echo $conf['homepage_url']; ?>" class="form-control" placeholder="将以frame方式显示" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">禁止访问IP</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="blackip" rows="2" placeholder="多个IP用|隔开"><?php echo $conf['blackip'] ?></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">友情链接</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="links" rows="2"><?php echo $conf['links'] ?></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">页脚代码</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="footer" rows="2"><?php echo $conf['footer'] ?></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <input type="submit" name="submit" value="修改" class="btn btn-primary form-control" />
                             </div>
                         </div>
                     </form>
@@ -124,6 +217,13 @@ $mod = isset($_GET['mod']) ? $_GET['mod'] : 'site';
             </div>
         <?php endif; ?>
         <script>
+            $("select[name='homepage']").change(function() {
+                if ($(this).val() == 2) {
+                    $("#setform4").show();
+                } else {
+                    $("#setform4").hide();
+                }
+            });
             function saveSetting(obj, type) {
                 var ii = layer.load(2, {
                     shade: [0.1, '#fff']

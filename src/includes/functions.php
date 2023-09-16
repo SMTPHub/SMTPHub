@@ -1,4 +1,21 @@
 <?php
+
+/**
+ * 是否微信浏览器内核
+ */
+function is_weixin()
+{
+    return !strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') === false;
+}
+
+/**
+ * 是否QQ浏览器内核
+ */
+function is_qq()
+{
+    return !strpos($_SERVER['HTTP_USER_AGENT'], 'QQ/') === false;
+}
+
 function get_curl($url, $post = 0, $referer = 0, $cookie = 0, $header = 0, $ua = 0, $nobaody = 0)
 {
     $ch = curl_init();

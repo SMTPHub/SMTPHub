@@ -1,5 +1,6 @@
 <?php
 define('IN_ADMIN', true);
+$mod = 'admin';
 include("../includes/common.php");
 $title = '管理中心';
 include './head.php';
