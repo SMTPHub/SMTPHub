@@ -36,7 +36,7 @@ $mod = isset($_GET['mod']) ? $_GET['mod'] : 'site';
                         <div class="form-group">
                             <label class="col-sm-2 control-label">站点LOGO</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" name="site_logo" required autocomplete="off" value="<?php echo $conf['site_logo'] ?>">
+                                <input class="form-control" type="text" name="site_logo" autocomplete="off" value="<?php echo $conf['site_logo'] ?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -46,7 +46,7 @@ $mod = isset($_GET['mod']) ? $_GET['mod'] : 'site';
                         <div class="form-group">
                             <label class="col-sm-2 control-label">站点ICP备案号</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" name="site_icp" required autocomplete="off" value="<?php echo $conf['site_icp'] ?>">
+                                <input class="form-control" type="text" name="site_icp" autocomplete="off" value="<?php echo $conf['site_icp'] ?>">
                             </div>
                         </div>
                         <div class="form-group">

@@ -70,6 +70,7 @@ switch ($act) {
         // exit(json_encode(['total' => $total, 'rows' => $list]));
         // break;
     case 'clean':
+        if (SYSTEM_MODE == 'demo') exit('{"code":-1,"msg":"演示模式，禁止执行本操作 ！"}');
         $days = intval($_POST['days']);
         if (empty($days) || !$days) $days = 1;
         $lastday = date("Y-m-d", strtotime("-{$days} day")) . ' 00:00:00';

@@ -9,10 +9,15 @@ INSERT INTO `pre_config` VALUES ('version', '1001');
 INSERT INTO `pre_config` VALUES ('admin_user', 'admin');
 INSERT INTO `pre_config` VALUES ('admin_pwd', '123456');
 INSERT INTO `pre_config` VALUES ('blackip', '');
-INSERT INTO `pre_config` VALUES ('title', '程江统一邮件发送');
-INSERT INTO `pre_config` VALUES ('keywords', '程江统一邮件发送,SMTP统一管理系统,SMTP统一管理平台,邮箱SMTP,邮件推送服务,SMTP API');
-INSERT INTO `pre_config` VALUES ('description', '程江统一邮件发送，类似于邮件推送 API 服务，可实现同一个 SMTP 接口对接多个业务站点，多个业务站点可以统一调用本系统接口实现邮件发送。');
+INSERT INTO `pre_config` VALUES ('site_name', 'SMTPHub');
+INSERT INTO `pre_config` VALUES ('site_logo', '/assets/img/logo.png');
+INSERT INTO `pre_config` VALUES ('title', '程江统一邮件发送管理系统');
+INSERT INTO `pre_config` VALUES ('keywords', '程江统一邮件发送管理系统,SMTP统一管理系统,SMTP统一管理平台,邮箱SMTP,邮件推送服务,SMTP API');
+INSERT INTO `pre_config` VALUES ('description', '程江统一邮件发送管理系统，类似于邮件推送 API 服务，可实现同一个 SMTP 接口对接多个业务站点，多个业务站点可以统一调用本系统接口实现邮件发送。');
 INSERT INTO `pre_config` VALUES ('ip_type', '0');
+INSERT INTO `pre_config` VALUES ('address', '上海市杨浦区福宁路60号404室');
+INSERT INTO `pre_config` VALUES ('email', 'jksdou@qq.com');
+INSERT INTO `pre_config` VALUES ('kfqq', '350430869');
 
 DROP TABLE IF EXISTS `pre_app`;
 CREATE TABLE `pre_app` (

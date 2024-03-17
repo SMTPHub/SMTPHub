@@ -53,7 +53,7 @@ include ROOT . '/config.php';
 if (!$dbconfig['user'] || !$dbconfig['pwd'] || !$dbconfig['dbname']) //检测安装1
 {
     header('Content-type:text/html;charset=utf-8');
-    echo '你还没安装！<a href="' . $site_url . '/install/">点此安装</a>';
+    echo '你还没安装！<a href="' . $site_http . '/install/">点此安装</a>';
     exit();
 }
 
@@ -62,8 +62,13 @@ $DB = new \lib\PdoHelper($dbconfig);
 if ($DB->query("select * from pre_config where 1") == FALSE) //检测安装2
 {
     header('Content-type:text/html;charset=utf-8');
-    echo '你还没安装！<a href="' . $site_url . '/install/">点此安装</a>';
+    echo '你还没安装！<a href="' . $site_http . '/install/">点此安装</a>';
     exit();
+}
+
+if (!file_exists(ROOT . '/install/install.lock') && file_exists(ROOT . '/install/index.php')) {
+    sysmsg('<h2>检测到无 install.lock 文件</h2><ul><li><font size="4">如果您尚未安装本程序，请<a href="' . $site_http . '/install/">前往安装</a></font></li><li><font size="4">如果您已经安装本程序，请手动放置一个空的 install.lock 文件到 /install 文件夹下，<b>为了您站点安全，在您完成它之前我们不会工作。</b></font></li></ul><br/><h4>为什么必须建立 install.lock 文件？</h4>它是安装保护文件，如果检测不到它，就会认为站点还没安装，此时任何人都可以安装/重装你的网站。<br/><br/>');
+    exit;
 }
 
 include_once(SYSTEM_ROOT . "/functions.php");
@@ -75,7 +80,7 @@ $password_hash = '!@#%!s!0';
 if (!$conf['version'] || $conf['version'] < DB_VERSION) {
     if (!$install) {
         header('Content-type:text/html;charset=utf-8');
-        echo '请先完成网站升级！<a href="' . $site_url . '/install/update.php"><font color=red>点此升级</font></a>';
+        echo '请先完成网站升级！<a href="' . $site_http . '/install/update.php"><font color=red>点此升级</font></a>';
         exit;
     }
 }
@@ -83,7 +88,7 @@ if (!$conf['version'] || $conf['version'] < DB_VERSION) {
 if ($mod != 'api') {
     // 非接口模块访问限制
     if (($conf['qqjump'] == 1 && (is_qq() || is_weixin()))) {
-        $site_uri = $site_url . $_SERVER['REQUEST_URI'];
+        $site_uri = $site_http . $_SERVER['REQUEST_URI'];
         require_once ROOT. '/page/page-browseronly.php';
         exit(0);
     }
@@ -122,6 +127,7 @@ if (in_array($clientip, $denyip) && !$admin_islogin) {
     exit;
 }
 
+$user_islogin = 0;
 if (isset($_COOKIE["user_token"])) {
     $token = authcode(daddslashes($_COOKIE['user_token']), 'DECODE', SYS_KEY);
     if ($token) {

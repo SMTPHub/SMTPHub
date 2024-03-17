@@ -53,9 +53,9 @@ include("./includes/common.php");
                         <li class="nav-item">
                             <a class="nav-link" href="/doc.php">开发文档</a>
                         </li>
-                        <?php if ($conf['test_open']) { ?><li class="nav-item">
-                            <!-- <a class="nav-link" href="/user/test.php">接口测试</a> -->
-                        </li><?php } ?>
+                        <?php if($conf['user_login']){?><li class="nav-item">
+                            <a class="nav-link" href="./user/">用户中心</a>
+                        </li><?php }?>
                         <li class="nav-item">
                             <a class="nav-link" href="/contact.php">联系我们</a>
                         </li>
