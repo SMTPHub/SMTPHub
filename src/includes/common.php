@@ -52,18 +52,14 @@ include ROOT . '/config.php';
 
 if (!$dbconfig['user'] || !$dbconfig['pwd'] || !$dbconfig['dbname']) //检测安装1
 {
-    header('Content-type:text/html;charset=utf-8');
-    echo '你还没安装！<a href="' . $site_http . '/install/">点此安装</a>';
-    exit();
+    exit('你还没安装！<a href="' . $site_http . '/install/">点此安装</a>');
 }
 
 $DB = new \lib\PdoHelper($dbconfig);
 
 if ($DB->query("select * from pre_config where 1") == FALSE) //检测安装2
 {
-    header('Content-type:text/html;charset=utf-8');
-    echo '你还没安装！<a href="' . $site_http . '/install/">点此安装</a>';
-    exit();
+    exit('你还没安装！<a href="' . $site_http . '/install/">点此安装</a>');
 }
 
 if (!file_exists(ROOT . '/install/install.lock') && file_exists(ROOT . '/install/index.php')) {
@@ -79,9 +75,7 @@ $password_hash = '!@#%!s!0';
 
 if (!$conf['version'] || $conf['version'] < DB_VERSION) {
     if (!$install) {
-        header('Content-type:text/html;charset=utf-8');
-        echo '请先完成网站升级！<a href="' . $site_http . '/install/update.php"><font color=red>点此升级</font></a>';
-        exit;
+        exit('请先完成网站升级！<a href="' . $site_http . '/install/update.php"><font color=red>点此升级</font></a>');
     }
 }
 
@@ -89,7 +83,7 @@ if ($mod != 'api') {
     // 非接口模块访问限制
     if (($conf['qqjump'] == 1 && (is_qq() || is_weixin()))) {
         $site_uri = $site_http . $_SERVER['REQUEST_URI'];
-        require_once ROOT. '/page/page-browseronly.php';
+        require_once ROOT . '/page/page-browseronly.php';
         exit(0);
     }
 }
@@ -128,24 +122,25 @@ if (in_array($clientip, $denyip) && !$admin_islogin) {
 }
 
 $user_islogin = 0;
-if (isset($_COOKIE["user_token"])) {
-    $token = authcode(daddslashes($_COOKIE['user_token']), 'DECODE', SYS_KEY);
-    if ($token) {
-        list($uid, $sid, $expiretime) = explode("\t", $token);
-        if ($userrow = $DB->getRow("SELECT * FROM pre_user WHERE uid='" . intval($uid) . "' LIMIT 1")) {
-            $session = md5($userrow['type'] . $userrow['openid'] . $password_hash);
-            if ($session === $sid && $expiretime > time()) {
-                if ($userrow['enable'] == 1) {
-                    $user_islogin = 1;
-                } else {
-                    $_SESSION['user_block'] = true;
+if (defined('IN_USER')) {
+    if (!$conf['user_login']) {
+        exit('<script type="text/javascript">alert("未开启登录");window.location.href="' . $site_http . '";</script>');
+    }
+
+    if (isset($_COOKIE["user_token"])) {
+        $token = authcode(daddslashes($_COOKIE['user_token']), 'DECODE', SYS_KEY);
+        if ($token) {
+            list($uid, $sid, $expiretime) = explode("\t", $token);
+            if ($userrow = $DB->getRow("SELECT * FROM pre_user WHERE uid='" . intval($uid) . "' LIMIT 1")) {
+                $session = md5($userrow['type'] . $userrow['openid'] . $password_hash);
+                if ($session === $sid && $expiretime > time()) {
+                    if ($userrow['enable'] == 1) {
+                        $user_islogin = 1;
+                    } else {
+                        $_SESSION['user_block'] = true;
+                    }
                 }
             }
         }
     }
-}
-
-if (!file_exists(ROOT . '/install/install.lock') && file_exists(ROOT . '/install/index.php')) {
-    sysmsg('<h2>检测到无 install.lock 文件</h2><ul><li><font size="4">如果您尚未安装本程序，请<a href="' . $site_url . '/install/">前往安装</a></font></li><li><font size="4">如果您已经安装本程序，请手动放置一个空的 install.lock 文件到 /install 文件夹下，<b>为了您站点安全，在您完成它之前我们不会工作。</b></font></li></ul><br/><h4>为什么必须建立 install.lock 文件？</h4>它是安装保护文件，如果检测不到它，就会认为站点还没安装，此时任何人都可以安装/重装你的网站。<br/><br/>');
-    exit;
 }
