@@ -19,7 +19,7 @@ SMTPHub 是一款基于 PHP 语言开发的 SMTP 服务管理和邮件发送系�
 
 **演示地址**：
 
-[http://smtphub.uiisc.com](http://smtphub.uiisc.com/)，账号 admin，密码 123456
+[http://smtphub.usite.pub/](http://smtphub.usite.pub/)，账号 admin，密码 123456
 
 **预览截图**：
 
