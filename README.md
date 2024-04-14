@@ -79,7 +79,7 @@ POST 参数说明
 
 ## 开源许可
 
-InPanel 采用 [BSD](./LICENSE) 许可发布。
+SMTPHub 采用 [BSD](./LICENSE) 许可发布。
 
 ## 作者
 
