@@ -41,18 +41,21 @@ include("./includes/common.php");
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item active">
+                            <li class="nav-item">
                                 <a class="nav-link" href="./">首页</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="doc.php">开发文档</a>
                             </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="./agreement.php">服务协议</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./about.php">关于我们</a>
+                            </li>
                             <?php if($conf['user_login']){?><li class="nav-item">
                                 <a class="nav-link" href="./user/">用户中心</a>
                             </li><?php }?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="./contact.php">联系我们</a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="https://github.com/SMTPHub/SMTPHub" target="_blank">Github</a>
                             </li>

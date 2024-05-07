@@ -1,7 +1,4 @@
 <?php
-if (version_compare(PHP_VERSION, '5.4.0', '<')) {
-    die('require PHP >= 5.4 !');
-}
 $mod = isset($_GET['mod']) ? $_GET['mod'] : 'home';
 include("./includes/common.php");
 
@@ -54,12 +51,15 @@ if($conf['homepage']==2){
                         <li class="nav-item">
                             <a class="nav-link" href="./doc.php">开发文档</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./agreement.php">服务协议</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="./about.php">关于我们</a>
+                        </li>
                         <?php if($conf['user_login']){?><li class="nav-item">
                             <a class="nav-link" href="./user/">用户中心</a>
                         </li><?php }?>
-                        <li class="nav-item">
-                          <a class="nav-link" href="./contact.php">联系我们</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="https://github.com/SMTPHub/SMTPHub" target="_blank">Github</a>
                         </li>

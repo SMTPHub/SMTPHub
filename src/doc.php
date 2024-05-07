@@ -41,18 +41,21 @@ include("./includes/common.php");
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
+              <li class="nav-item">
                 <a class="nav-link" href="./">首页</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a class="nav-link" href="doc.php">开发文档</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="./agreement.php">服务协议</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.php">关于我们</a>
               </li>
               <?php if($conf['user_login']){?><li class="nav-item">
                   <a class="nav-link" href="./user/">用户中心</a>
               </li><?php }?>
-              <li class="nav-item">
-                <a class="nav-link" href="contact.php">联系我们</a>
-              </li>
               <li class="nav-item">
                 <a class="nav-link" href="https://github.com/SMTPHub/SMTPHub" target="_blank">Github</a>
               </li>
@@ -81,18 +84,18 @@ include("./includes/common.php");
     <div class="card" id="doc1">
       <div class="card-header"><?php echo $conf['site_name']?> 介绍</div>
       <div class="card-body">
-        <p>
-        <?php echo $conf['site_name']?> 就是利用用户在第三方平台上已有的邮箱账号来进行邮件的发送，使用本系统可以将多个 SMTP 服务统一聚合起来使用，
-        通过本系统的接口，开发者可以通过接口 APPID 和 APPSECRET 进行 SMTP 邮箱的发送操作。
-        <br />这里的第三方平台，是指网易、QQ、新浪、Tom、搜狐、Gmail、Outlook，等支持 SMTP 的邮箱服务平台。
-        </p>
+        <p><?php echo $conf['site_name']?> 是一款使用第三方平台邮箱账号来进行发送邮件的系统。</p>
+        <p>使用本系统可以将多个 SMTP 服务统一聚合起来使用，通过本系统的接口，开发者可以通过接口 APPID 和 APPSECRET 进行 SMTP 邮箱的发送操作。</p>
+        <p>这里的第三方平台，是指网易、QQ、新浪、Tom、搜狐、Gmail、Outlook，等支持 SMTP 的邮箱服务平台。</p>
       </div>
     </div>
 
     <div class="card" id="doc2">
       <div class="card-header">接口协议规则</div>
       <div class="card-body">
-        <p>传输方式：HTTP<br />数据格式：JSON<br />字符编码：UTF-8</p>
+        <p>传输方式：HTTP</p>
+        <p>数据格式：JSON 或 FormData</p>
+        <p>字符编码：UTF-8</p>
       </div>
     </div>
 
@@ -134,7 +137,7 @@ include("./includes/common.php");
                 <td>to</td>
                 <td>必须</td>
                 <td>邮件收件人地址</td>
-                <td>username@qq.com</td>
+                <td>username@email-server.com</td>
             </tr>
             <tr>
                 <td>subject</td>
@@ -161,8 +164,19 @@ include("./includes/common.php");
                 <td>【站点名称】</td>
             </tr>
         </table></div>
-        注意： 邮件发信人名称，未设置时，按照应用配置的【发信人名称】<br />来显示，若未配置则显示为配置的【应用名称】
+        注意： 邮件发信人名称，未设置时，按照应用配置的【发信人名称】来显示，若未配置则显示为配置的【应用名称】
         <hr />
+        <p>接口请求 JSON 示例</p>
+        <code><pre>{
+    "appid": 1000,
+    "appsecret": "Cd2DBg2R0JuXgLsrkXb6AfLXV8kW8p4k",
+    "action": "send",
+    "to": "username@email-server.com",
+    "subject": "网站通知",
+    "message": "&lt;p&gt;您好，感谢您加入会员 ！支持HTML！&lt;/p&gt;",
+    "to_name": "【网站会员】",
+    "from_name": "【站点名称】"
+}</pre></code>
         <p>接口返回状态：发送成功</p>
         <pre>{
     "code": 0,
@@ -196,7 +210,7 @@ include('SMTPHub.php');
 $SMTP = new \lib\mail\SMTPHub('<?php echo $site_url; ?>/api.php', '1000', 'Cd2DBg2R0JuXgLsrkXb6AfLXV8kW8p4k');
 
 // 定义参数
-$to        = 'username@qq.com';
+$to        = 'username@email-server.com';
 $to_name   = '接收人名字';
 $subject   = "这是一封测试邮件";
 $message   = "邮件内容";
@@ -205,8 +219,7 @@ $from_name = '发信人名字';
 // 调用发送接口
 $result    = $SMTP->send($to, $subject, $message, $to_name, $from_name);
 
-// 输出结果，格式与上面的接口调用一致
-@header('Content-Type: application/json; charset=UTF-8');
+// 输出结果
 echo $result;
 </pre>
       </div>
