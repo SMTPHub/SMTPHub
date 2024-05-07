@@ -17,6 +17,10 @@ $date = date("Y-m-d H:i:s");
 
 @header('Content-Type: text/html; charset=UTF-8');
 
+if (version_compare(PHP_VERSION, '5.4.0', '<')) {
+    die('require PHP >= 5.4 !');
+}
+
 if (!$nosession) session_start();
 
 if (!function_exists("is_https")) {
@@ -79,6 +83,8 @@ if (!$conf['version'] || $conf['version'] < DB_VERSION) {
     }
 }
 
+if (defined('IN_API')) return;
+
 if ($mod != 'api') {
     // 非接口模块访问限制
     if (($conf['qqjump'] == 1 && (is_qq() || is_weixin()))) {
@@ -98,8 +104,6 @@ if ($conf['cdnpublic'] == 1) {
     $cdnpublic = 'https://cdn.staticfile.org/';
 }
 
-$clientip = real_ip(isset($conf['ip_type']) ? $conf['ip_type'] : 0);
-
 $admin_islogin = 0;
 
 if (isset($_COOKIE["admin_token"])) {
@@ -115,6 +119,7 @@ if (isset($_COOKIE["admin_token"])) {
 
 if (defined('IN_ADMIN')) return;
 
+$clientip = real_ip(isset($conf['ip_type']) ? $conf['ip_type'] : 0);
 $denyip = explode('|', $conf['blackip']);
 if (in_array($clientip, $denyip) && !$admin_islogin) {
     header("HTTP/1.1 403 Forbidden");

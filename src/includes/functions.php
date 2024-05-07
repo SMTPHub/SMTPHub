@@ -356,6 +356,45 @@ function get_main_host($url)
     return $host;
 }
 
+function _get($field = '', $default = '')
+{
+    if (!$field) {
+        // return $_GET;
+        $kv = array();
+        foreach ($_POST as $k => $v) {
+            $kv[$k] = trim(htmlspecialchars($v));
+        }
+        return $kv;
+    }
+    if (!isset($_GET[$field])) {
+        return $default ? $default : false;
+    }
+    if (is_string($_GET[$field])) {
+        return trim(htmlspecialchars($_GET[$field]));
+    }
+    return $_GET[$field];
+}
+
+function _post($field = '', $default = '')
+{
+    if (!$field) {
+        // return $_POST;
+        $kv = array();
+        foreach ($_POST as $k => $v) {
+            $kv[$k] = trim(htmlspecialchars($v));
+        }
+        return $kv;
+    }
+
+    if (!isset($_POST[$field])) {
+        return $default ? $default : false;
+    }
+    if (is_string($_POST[$field])) {
+        return trim(htmlspecialchars($_POST[$field]));
+    }
+    return $_POST[$field];
+}
+
 function refresh_wx_access_token($id, $force = false)
 {
     global $DB;
