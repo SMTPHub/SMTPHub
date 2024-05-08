@@ -439,28 +439,30 @@ function refresh_wx_access_token($id, $force = false)
 function send_mail($config, $detail = array())
 {
     if (!empty($detail['to']) && !empty($detail['message']) && !empty($detail['subject'])) {
-        $to = $detail['to'];
-        $to_name = isset($detail['to_name']) ? $detail['to_name'] : '';
-        $from = !empty($config['smtp_from']) ? $config['smtp_from'] : $config['smtp_username'];
-        $from_name = isset($detail['from_name']) ? $detail['from_name'] : 'SMTPHub';
-        $subject = $detail['subject'];
-        $body = $detail['message'];
-        $mailtype = 'HTML'; // HTML/TXT
+        $to         = $detail['to'];
+        $to_name    = isset($detail['to_name']) ? $detail['to_name'] : '';
+        $from       = !empty($config['smtp_from']) ? $config['smtp_from'] : $config['smtp_username'];
+        $from_name  = isset($detail['from_name']) ? $detail['from_name'] : 'SMTPHub';
+        $reply_to   = isset($detail['reply_to']) ? $detail['reply_to'] : '';
+        $reply_name = isset($detail['reply_name']) ? $detail['reply_name'] : '';
+        $subject    = $detail['subject'];
+        $body       = $detail['message'];
+        $mailtype   = 'HTML'; // HTML/TXT
 
         $emails_log = array(
-            'appid' => $detail['appid'],
-            'smtp_id' => $config['id'],
+            'appid'        => $detail['appid'],
+            'smtp_id'      => $config['id'],
             'mail_subject' => $subject,
-            'mail_from' => $from,
-            'mail_to' => $to,
-            'mail_body' => $body,
-            'mail_date' => date('Y-m-d H:i:s'),
+            'mail_from'    => $from,
+            'mail_to'      => $to,
+            'mail_body'    => $body,
+            'mail_date'    => date('Y-m-d H:i:s'),
         );
         // print_r($emails_log);
         // $DB->update('record', ['status' => 1], ['smtp_id' => 5]);
 
         $smtp = new \lib\MailSMTP($config['smtp_host'], $config['smtp_username'], $config['smtp_password'], $config['smtp_port']);
-        $res = $smtp->sendmail($from, $to, $subject, $body, $to_name, $from_name, $mailtype);
+        $res = $smtp->sendmail($from, $to, $subject, $body, $to_name, $from_name, $mailtype, '', '', $reply_to, $reply_name);
         global $DB;
         if (!$res) {
             $emails_log['status'] = 0;

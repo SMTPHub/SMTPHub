@@ -39,8 +39,10 @@ switch ($action) {
         if (!$smtp_config) exit('{"code":-1,"msg":"邮件服务不存在"}');
         if (intval($smtp_config['status']) < 1) exit('{"code":-1,"msg":"邮件服务不可用"}');
         // 检查邮件信息
-        $to_name   = _post('to_name');
-        $from_name = _post('from_name');
+        $to_name    = _post('to_name');
+        $from_name  = _post('from_name');
+        $reply_to   = _post('reply_to');
+        $reply_name = _post('reply_name');
         if (empty($from_name)) {
             // 发信人名称
             if (!empty($app_config['app_from_name'])) {
@@ -53,12 +55,14 @@ switch ($action) {
 
         // 发送邮件
         $params = array(
-            'appid'     => $appid,
-            'to'        => $to,
-            'subject'   => $subject,
-            'message'   => $message,
-            'to_name'   => $to_name,
-            'from_name' => $from_name,
+            'appid'      => $appid,
+            'to'         => $to,
+            'subject'    => $subject,
+            'message'    => $message,
+            'to_name'    => $to_name,
+            'from_name'  => $from_name,
+            'reply_to'   => $reply_to,
+            'reply_name' => $reply_name,
         );
         // exit(json_encode(['code' => 0, 'data' => $params]));
         if (send_mail($smtp_config, $params)) {

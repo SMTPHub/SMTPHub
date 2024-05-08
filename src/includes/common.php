@@ -9,7 +9,7 @@ define('IN_CRONLITE', true);
 define('SYSTEM_MODE', 'prod');
 define('SYSTEM_ROOT', dirname(__FILE__));
 define('ROOT', dirname(SYSTEM_ROOT));
-define('APP_VERSION', '1.1.2');
+define('APP_VERSION', '1.1.3');
 define('VERSION', '1002');
 define('DB_VERSION', '1001');
 date_default_timezone_set('Asia/Shanghai');

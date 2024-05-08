@@ -163,6 +163,18 @@ include("./includes/common.php");
                 <td>邮件发信人名称</td>
                 <td>【站点名称】</td>
             </tr>
+            <tr>
+                <td>reply_to</td>
+                <td>可选</td>
+                <td>回信地址</td>
+                <td>service@email-server.com</td>
+            </tr>
+            <tr>
+                <td>reply_name</td>
+                <td>可选</td>
+                <td>回信地址名称</td>
+                <td>客户服务</td>
+            </tr>
         </table></div>
         注意： 邮件发信人名称，未设置时，按照应用配置的【发信人名称】来显示，若未配置则显示为配置的【应用名称】
         <hr />
@@ -175,7 +187,9 @@ include("./includes/common.php");
     "subject": "网站通知",
     "message": "&lt;p&gt;您好，感谢您加入会员 ！支持HTML！&lt;/p&gt;",
     "to_name": "【网站会员】",
-    "from_name": "【站点名称】"
+    "from_name": "【站点名称】",
+    "reply_to": "service@email-server.com",
+    "reply_name": "【客户服务部】"
 }</pre></code>
         <p>接口返回状态：发送成功</p>
         <pre>{

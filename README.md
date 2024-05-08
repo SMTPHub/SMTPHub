@@ -50,29 +50,33 @@ SMTPHub 是一款基于 PHP 语言开发的 SMTP 服务管理和邮件发送系�
 
 POST 参数说明
 
-| 参数名    | 必要 | 示例                             | 说明                                                         |
-| --------- | ---- | -------------------------------- | ------------------------------------------------------------ |
-| action    | 必须 | send                             | 发送邮件                                                     |
-| appid     | 必须 | 1000                             | 应用ID                                                       |
-| appsecret | 必须 | Cd2DBg2R0JuXgLsrkXb6AfLXV8kW8p4k | 应用密钥                                                     |
-| to        | 必须 | username@email-server.com | 邮件收件人地址                                               |
-| subject   | 必须 | 网站通知                         | 邮件主题                                                     |
-| message   | 必须 | `<p>您好，感谢您加入会员 ！</p>` | 邮件内容，支持 HTML                                          |
-| to_name   | 可选 | 【网站会员】                     | 收信人名称                                                   |
-| from_name | 可选 | 【站点名称】                     | 发信人名称，未设置时，按照应用配置的【发信人名称】来显示， 若未配置则显示为配置的【应用名称】 |
+| 参数名     | 必要 | 示例                             | 说明                                                         |
+| ---------- | ---- | -------------------------------- | ------------------------------------------------------------ |
+| action     | 必须 | send                             | 发送邮件                                                     |
+| appid      | 必须 | 1000                             | 应用ID                                                       |
+| appsecret  | 必须 | Cd2DBg2R0JuXgLsrkXb6AfLXV8kW8p4k | 应用密钥                                                     |
+| to         | 必须 | username@email-server.com        | 收件人地址                                                   |
+| subject    | 必须 | 网站通知                         | 邮件主题                                                     |
+| message    | 必须 | `<p>您好，感谢您加入会员 ！</p>` | 邮件内容，支持 HTML                                          |
+| to_name    | 可选 | 【网站会员】                     | 收信人名称                                                   |
+| from_name  | 可选 | 【站点名称】                     | 发信人名称，未设置时，按照应用配置的【发信人名称】来显示， 若未配置则显示为配置的【应用名称】 |
+| reply_to   | 可选 | service@email-server.com         | 回信地址                                                     |
+| reply_name | 可选 | 【客户服务部】                   | 回信地址名称（当设置回信地址时才生效），未设置时，替换为发信人名称 |
 
 接口请求 JSON 示例
 
 ```json
 {
-    "appid": 1000,
-    "appsecret": "Cd2DBg2R0JuXgLsrkXb6AfLXV8kW8p4k",
-    "action": "send",
-    "to": "username@email-server.com",
-    "subject": "网站通知",
-    "message": "<p>您好，感谢您加入会员 ！支持HTML！</p>",
-    "to_name": "【网站会员】",
-    "from_name": "【站点名称】"
+    "appid"      : 1000,
+    "appsecret"  : "Cd2DBg2R0JuXgLsrkXb6AfLXV8kW8p4k",
+    "action"     : "send",
+    "to"         : "username@email-server.com",
+    "subject"    : "网站通知",
+    "message"    : "<p>您好，感谢您加入会员 ！支持HTML！</p>",
+    "to_name"    : "【网站会员】",
+    "from_name"  : "【站点名称】",
+    "reply_to"   : "service@email-server.com",
+    "reply_name" : "【客户服务部】"
 }
 ```
 

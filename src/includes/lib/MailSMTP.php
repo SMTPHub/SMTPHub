@@ -53,10 +53,12 @@ class MailSMTP
      * @param  string $body 邮件内容
      * @param  string $to_name 接收人名称
      * @param  string $from_name 发送人名称
+     * @param  string $reply_to 回信地址
+     * @param  string $reply_name 回信地址名称
      * @param  string $mailtype 邮件类型(可选 HTML / TXT, 默认 TXT)
      * @return bool   是否发送成功
      */
-    public function sendmail($from, $to, $subject, $body = "", $to_name = "", $from_name = "", $mailtype = '', $cc = "", $bcc = "", $additional_headers = "")
+    public function sendmail($from, $to, $subject, $body = "", $to_name = "", $from_name = "", $mailtype = '', $cc = "", $bcc = "", $reply_to = "", $reply_name = "", $additional_headers = "")
     {
         $mail_from = $this->get_address($this->strip_comment($from));
         $body = preg_replace("/(^|(\r\n))(\.)/", "\1.\3", $body);
@@ -66,32 +68,46 @@ class MailSMTP
         } else {
             $header .= 'Content-Type: text/plain; charset="utf-8"' . "\r\n";
         }
+        // 接收人
         if (!empty($to_name)) {
             $header .= "To: =?utf-8?B?" . base64_encode($to_name) . "?= <{$to}>\r\n";
         } else {
             $header .= "To: {$to} <{$to}>\r\n";
         }
+        // 抄送
         if (!empty($cc)) {
             $header .= "Cc: {$cc}\r\n";
         }
+        // 发送人
         if (!empty($from_name)) {
             $header .= "From: =?utf-8?B?" . base64_encode($from_name) . "?= <{$from}>\r\n";
         } else {
             $header .= "From: {$from} <{$from}>\r\n";
         }
+        // 回信地址
+        if (!empty($reply_to)) {
+            if (!empty($reply_name)) {
+                $header .= "Reply-To: =?utf-8?B?" . base64_encode($reply_name) . "?= <{$reply_to}>\r\n";
+            } else {
+                $header .= "Reply-To: =?utf-8?B?" . base64_encode($from_name) . "?= <{$reply_to}>\r\n";
+            }
+        }
         $header .= "Subject: =?utf-8?B?" . base64_encode($subject) . "?=\r\n";
         $header .= $additional_headers;
         $header .= "Date: " . date("r") . "\r\n";
-        $header .= "X-Mailer: SMTPHub (PHP/" . phpversion() . ")\r\n";
+        $header .= "X-Mailer: SMTPHub v" . APP_VERSION . " (PHP/" . phpversion() . ")\r\n";
         list($msec, $sec) = explode(" ", microtime());
         $header .= "Message-ID: <" . date("YmdHis", $sec) . "." . ($msec * 1000000) . "." . $mail_from . ">\r\n";
         $TO = explode(",", $this->strip_comment($to));
+        // 抄送
         if ($cc != "") {
             $TO = array_merge($TO, explode(",", $this->strip_comment($cc)));
         }
+        // 密送
         if ($bcc != "") {
             $TO = array_merge($TO, explode(",", $this->strip_comment($bcc)));
         }
+        // print_r($header);
         $sent = true;
         foreach ($TO as $rcpt_to) {
             $rcpt_to = $this->get_address($rcpt_to);
