@@ -46,7 +46,7 @@ if ($admin_islogin != 1) exit("<script language='javascript'>window.location.hre
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-3 control-label">应用类别</label>
+        <label class="col-sm-3 control-label">应用类型</label>
         <div class="col-sm-9">
             <select name="app_type" class="form-control">
                 <option value="1">后台服务</option>
