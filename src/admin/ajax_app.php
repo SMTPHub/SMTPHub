@@ -17,6 +17,10 @@ switch ($act) {
         if (!$row) exit('{"code":-1,"msg":"应用不存在！"}');
         exit(json_encode(['code' => 0, 'data' => $row]));
         break;
+    case 'options':
+        $row = $DB->findAll('app', 'id,app_name,address', ['status' => 1]);
+        exit(json_encode(['code' => 0, 'data' => $row]));
+        break;
     case 'list':
         $sql = " 1=1";
 
