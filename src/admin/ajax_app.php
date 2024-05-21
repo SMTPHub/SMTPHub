@@ -18,7 +18,7 @@ switch ($act) {
         exit(json_encode(['code' => 0, 'data' => $row]));
         break;
     case 'options':
-        $row = $DB->findAll('app', 'id,app_name,address', ['status' => 1]);
+        $row = $DB->findAll('app', 'id,app_name,app_from_name,smtp_id', ['status' => 1]);
         exit(json_encode(['code' => 0, 'data' => $row]));
         break;
     case 'list':
