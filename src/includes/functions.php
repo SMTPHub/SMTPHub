@@ -442,7 +442,12 @@ function send_mail($config, $detail = array())
         $to         = $detail['to'];
         $to_name    = isset($detail['to_name']) ? $detail['to_name'] : '';
         $from       = !empty($config['smtp_from']) ? $config['smtp_from'] : $config['smtp_username'];
-        $from_name  = isset($detail['from_name']) ? $detail['from_name'] : 'SMTPHub';
+        // 服务中配置的默认发信人名称
+        $from_name  = isset($config['smtp_from_name']) ? $config['smtp_from_name'] : 'SMTPHub';
+        // 应用设置的发信人名称
+        if (isset($detail['from_name'])) {
+            $from_name  = $detail['from_name'];
+        }
         $reply_to   = isset($detail['reply_to']) ? $detail['reply_to'] : '';
         $reply_name = isset($detail['reply_name']) ? $detail['reply_name'] : '';
         $subject    = $detail['subject'];

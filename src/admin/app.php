@@ -6,8 +6,9 @@ include './head.php';
 if ($admin_islogin != 1) exit("<script language='javascript'>window.location.href='./login.php';</script>");
 ?>
 
-<div class="container" style="padding-top:70px;">
+<div class="container" style="padding-top: 50px;">
     <div class="col-md-12 center-block" style="float: none;">
+        <h3><?php echo $title; ?></h3>
         <form onsubmit="return searchSubmit()" method="GET" class="form-inline" id="searchToolbar">
             <div class="form-group">
                 <label>搜索</label>
@@ -31,7 +32,6 @@ if ($admin_islogin != 1) exit("<script language='javascript'>window.location.hre
             <a href="javascript:addApp()" class="btn btn-success"><i class="fa fa-plus"></i> 添加</a>
             <a href="../doc.php" class="btn btn-default" target="_blank"><i class="fa fa-info-circle"></i> 帮助</a>
         </form>
-
         <table id="listTable"></table>
     </div>
 </div>

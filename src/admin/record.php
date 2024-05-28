@@ -2,12 +2,13 @@
 $mod = 'admin';
 include("../includes/common.php");
 if ($admin_islogin != 1) exit("<script language='javascript'>window.location.href='./login.php';</script>");
-$title = '发送记录';
+$title = '发信记录';
 include './head.php';
 ?>
 
-<div class="container" style="padding-top:70px;">
+<div class="container" style="padding-top: 50px;">
     <div class="col-xs-12 center-block" style="float: none;">
+        <h3><?php echo $title; ?></h3>
         <div id="searchToolbar">
             <form onsubmit="return searchSubmit()" method="GET" class="form-inline">
                 <input type="hidden" name="did">
@@ -33,7 +34,6 @@ include './head.php';
                 </div>
             </form>
         </div>
-
         <table id="listTable"></table>
     </div>
 </div>
@@ -63,16 +63,16 @@ include './head.php';
                 },
                 {
                     field: 'appid',
-                    title: 'AppID',
+                    title: '应用ID',
                     formatter: function(value, row, index) {
-                        return '<a href="app.php?id=' + row.appid + '">' + row.appid + '</a>';
+                        return value ? '<a href="app.php?id=' + value + '">' + value + '</a>' : '-';
                     }
                 },
                 {
                     field: 'smtp_id',
                     title: '服务ID',
                     formatter: function(value, row, index) {
-                        return '<a href="smtp.php?id=' + row.smtp_id + '">' + row.smtp_id + '</a>';
+                        return '<a href="smtp.php?id=' + value + '">' + value + '</a>';
                     }
                 },
                 {
@@ -100,7 +100,7 @@ include './head.php';
                 },
                 {
                     field: 'status',
-                    title: '回调结果',
+                    title: '状态',
                     formatter: function(value, row, index) {
                         return value == 1 ? '<span class="label label-success">成功</span>' : '<span class="label label-default">失败</span>';
                     }

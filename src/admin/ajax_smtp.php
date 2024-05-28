@@ -61,50 +61,39 @@ switch ($act) {
             'message' => '当您收到此邮件时，证明 SMTP 已经配置正确，可以进行使用。',
             'subject' => '测试邮件'
         );
-        // $from = !empty($smtp_config['smtp_from']) ? $smtp_config['smtp_from'] : $smtp_config['smtp_username'];
-
-        // $record = array(
-        //     'appid' => 0,
-        //     'smtp_id' => $smtp_config['id'],
-        //     'subject' => $mail_body['subject'],
-        //     'from' => $from,
-        //     'to' => $mail_body['to'],
-        //     'body' => $mail_body['message'],
-        //     'date' => date('Y-m-d H:i:s')
-        // );
-        // print_r($config);
-        // print_r($record);
-        // $res = $DB->insert('record', $record);
-        // print_r($res);
+        // 服务商支持自定义发信人地址的才能发信成功，否则请使用 SMTP 账号
+        $from = !empty($smtp_config['smtp_from']) ? $smtp_config['smtp_from'] : $smtp_config['smtp_username'];
 
         if (send_mail($smtp_config, $mail_body)) {
             exit(json_encode(['code' => 0, 'msg' => '发送成功！']));
-        } else {
-            exit(json_encode(['code' => -1, 'msg' => '发送失败']));
         }
+        exit(json_encode(['code' => -1, 'msg' => '发送失败']));
         break;
     case 'save':
-        $name = trim(daddslashes($_POST['name']));
-        $id = intval(trim($_POST['id']));
-        $smtp_host = trim(daddslashes($_POST['smtp_host']));
-        $smtp_port = trim(daddslashes($_POST['smtp_port']));
-        $smtp_username = trim(daddslashes($_POST['smtp_username']));
-        $smtp_password = trim(daddslashes($_POST['smtp_password']));
-        $smtp_from = trim(daddslashes($_POST['smtp_from']));
-        $action = trim(daddslashes($_POST['action']));
+        $id             = intval(_post('id'));
+        $name           = _post('name');
+        $smtp_host      = _post('smtp_host');
+        $smtp_port      = _post('smtp_port');
+        $smtp_username  = _post('smtp_username');
+        $smtp_password  = _post('smtp_password');
+        $smtp_from      = _post('smtp_from'); // 自定义发信地址
+        $smtp_from_name = _post('smtp_from_name'); // 默认发信人名称
+        $action         = _post('action');
+
         if (!$name || !$smtp_host || !$smtp_port || !$smtp_username || !$smtp_password) exit('{"code":-1,"msg":"必填项不能为空"}');
         if ($_POST['action'] == 'add') {
             if ($DB->find('smtp', 'name', ['name' => $name])) exit('{"code":-1,"msg":"名称重复，请勿重复添加"}');
             if ($DB->find('smtp', 'name', ['smtp_username' => $smtp_username])) exit('{"code":-1,"msg":"SMTP账号重复，请勿重复添加"}');
 
             if (!$DB->insert('smtp', [
-                'name' => $name,
-                'status' => 1,
-                'smtp_host' => $smtp_host,
-                'smtp_port' => $smtp_port,
-                'smtp_username' => $smtp_username,
-                'smtp_password' => $smtp_password,
-                'smtp_from' => $smtp_from,
+                'name'           => $name,
+                'status'         => 1,
+                'smtp_host'      => $smtp_host,
+                'smtp_port'      => $smtp_port,
+                'smtp_username'  => $smtp_username,
+                'smtp_password'  => $smtp_password,
+                'smtp_from'      => $smtp_from,
+                'smtp_from_name' => $smtp_from_name,
                 'addtime' => date("Y-m-d H:i:s")
             ])) exit('{"code":-1,"msg":"添加失败：<br />[' . $DB->error() . ']"}');
             exit('{"code":0,"msg":"添加成功！"}');
@@ -116,13 +105,14 @@ switch ($act) {
             if (!$DB->update(
                 'smtp',
                 [
-                    'name' => $name,
-                    'smtp_host' => $smtp_host,
-                    'smtp_port' => $smtp_port,
-                    'smtp_username' => $smtp_username,
-                    'smtp_password' => $smtp_password,
-                    'smtp_from' => $smtp_from,
-                    'updatetime' => date("Y-m-d H:i:s")
+                    'name'           => $name,
+                    'smtp_host'      => $smtp_host,
+                    'smtp_port'      => $smtp_port,
+                    'smtp_username'  => $smtp_username,
+                    'smtp_password'  => $smtp_password,
+                    'smtp_from'      => $smtp_from,
+                    'smtp_from_name' => $smtp_from_name,
+                    'updatetime'     => date("Y-m-d H:i:s")
                 ],
                 ['id' => $id]
             )) exit('{"code":-1,"msg":"修改失败：<br />[' . $DB->error() . ']"}');

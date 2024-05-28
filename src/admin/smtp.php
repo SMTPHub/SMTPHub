@@ -1,7 +1,7 @@
 <?php
 $mod = 'admin';
 include("../includes/common.php");
-$title = 'SMTP 管理';
+$title = 'SMTP 服务管理';
 include './head.php';
 if ($admin_islogin != 1) exit("<script language='javascript'>window.location.href='./login.php';</script>");
 ?>
@@ -18,7 +18,7 @@ if ($admin_islogin != 1) exit("<script language='javascript'>window.location.hre
                     <input type="hidden" name="action" id="action" />
                     <input type="hidden" name="id" id="id" />
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">名称</label>
+                        <label class="col-sm-3 control-label no-padding-right">服务名称</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="name" id="name" placeholder="仅用于显示，不要重复">
                         </div>
@@ -48,9 +48,16 @@ if ($admin_islogin != 1) exit("<script language='javascript'>window.location.hre
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">邮件发送人</label>
+                        <label class="col-sm-3 control-label no-padding-right">发信人名称</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="smtp_from" id="smtp_from" maxlength="100" placeholder="用于邮件的发件人">
+                            <input type="text" class="form-control" name="smtp_from_name" id="smtp_from_name" maxlength="100" placeholder="邮件的发件人名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">发信人地址</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="smtp_from" id="smtp_from" maxlength="100" placeholder="邮件的发信人地址，如 mail@company.com">
+                            <small>自定义发信人地址需服务商支持，否则请留空或填写SMTP账号</small>
                         </div>
                     </div>
                 </form>
@@ -63,8 +70,9 @@ if ($admin_islogin != 1) exit("<script language='javascript'>window.location.hre
     </div>
 </div>
 
-<div class="container" style="padding-top:70px;">
+<div class="container" style="padding-top: 50px;">
     <div class="col-md-12 center-block" style="float: none;">
+        <h3><?php echo $title; ?></h3>
         <form onsubmit="return searchSubmit()" method="GET" class="form-inline" id="searchToolbar">
             <div class="form-group">
                 <label>搜索</label>
@@ -194,6 +202,7 @@ if ($admin_islogin != 1) exit("<script language='javascript'>window.location.hre
                     $("#smtp_username").val(data.data.smtp_username);
                     $("#smtp_password").val(data.data.smtp_password);
                     $("#smtp_from").val(data.data.smtp_from);
+                    $("#smtp_from_name").val(data.data.smtp_from_name);
                 } else {
                     layer.alert(data.msg, {
                         icon: 2

@@ -24,11 +24,11 @@ switch ($action) {
         $to        = _post('to');
         $subject   = _post('subject');
         $message   = _post('message');
-        if (empty($appid)) exit('{"code":-1,"msg":"appid 不能为空"}');
+        if (empty($appid))     exit('{"code":-1,"msg":"appid 不能为空"}');
         if (empty($appsecret)) exit('{"code":-1,"msg":"appsecret 不能为空"}');
-        if (empty($to)) exit('{"code":-1,"msg":"收件人不能为空"}');
-        if (empty($subject)) exit('{"code":-1,"msg":"主题不能为空"}');
-        if (empty($message)) exit('{"code":-1,"msg":"内容不能为空"}');
+        if (empty($to))        exit('{"code":-1,"msg":"收件人不能为空"}');
+        if (empty($subject))   exit('{"code":-1,"msg":"主题不能为空"}');
+        if (empty($message))   exit('{"code":-1,"msg":"内容不能为空"}');
         // 检查应用信息
         $app_config = $DB->find('app', 'app_name,app_from_name,smtp_id,status', ['id' => $appid, 'app_secret' => $appsecret]);
         if (!$app_config) exit('{"code":-1,"msg":"应用不存在或密钥不正确"}');
@@ -36,8 +36,8 @@ switch ($action) {
         if (intval($app_config['smtp_id']) < 1) exit('{"code":-1,"msg":"应用未绑定邮件服务"}');
         // 检查 SMTP 服务信息
         $smtp_config = $DB->find('smtp', '*', ['id' => $app_config['smtp_id']]);
-        if (!$smtp_config) exit('{"code":-1,"msg":"邮件服务不存在"}');
-        if (intval($smtp_config['status']) < 1) exit('{"code":-1,"msg":"邮件服务不可用"}');
+        if (!$smtp_config) exit(json_encode(['code' => -1, 'msg' => '邮件服务不存在']));
+        if (intval($smtp_config['status']) < 1) exit(json_encode(['code' => -1, 'msg' => '邮件服务不可用']));
         // 检查邮件信息
         $to_name    = _post('to_name');
         $from_name  = _post('from_name');
