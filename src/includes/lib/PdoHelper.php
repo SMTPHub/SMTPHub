@@ -370,6 +370,30 @@ class PdoHelper
     }
 
     /**
+     * 查询某个字段所有不同非空的值
+     *
+     * @param string $table string 表名
+     * @param string $field string 字段
+     *
+     * @return mixed
+     */
+    public function getDistinct($table, $field)
+    {
+        $sql = 'SELECT DISTINCT `' . $field . '` FROM `pre_' . $table . '` WHERE `' . $field . '` IS NOT NULL';
+        $stmt = $this->db->query($sql);
+        $distinctValues = $stmt->fetchAll();
+        if ($distinctValues) {
+            $res = [];
+            foreach ($distinctValues as $value) {
+                $res[] = $value[$field];
+            }
+            return $res;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * 返回最后插入行的ID
      *
      * @return int|\PDOStatement

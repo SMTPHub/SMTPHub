@@ -87,10 +87,12 @@ $mod = isset($_GET['mod']) ? $_GET['mod'] : 'site';
                             <label class="col-sm-2 control-label">公共静态资源CDN</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="cdnpublic" default="<?php echo $conf['cdnpublic'] ?>">
-                                    <option <?php echo $conf['cdnpublic'] == 0 ? 'selected ' : '' ?> value="0">七牛云CDN</option>
-                                    <option <?php echo $conf['cdnpublic'] == 1 ? 'selected ' : '' ?> value="1">360CDN</option>
-                                    <option <?php echo $conf['cdnpublic'] == 2 ? 'selected ' : '' ?> value="2">BootCDN</option>
-                                    <option <?php echo $conf['cdnpublic'] == 4 ? 'selected ' : '' ?> value="4">今日头条CDN</option>
+                                    <option <?php echo $conf['cdnpublic'] == 0 ? 'selected ' : '' ?> value="0">本地自有 - /assets/</option>
+                                    <option <?php echo $conf['cdnpublic'] == 1 ? 'selected ' : '' ?> value="1">七牛云CDN - https://cdn.staticfile.org/</option>
+                                    <option <?php echo $conf['cdnpublic'] == 2 ? 'selected ' : '' ?> value="2">七牛云CDN - https://cdn.staticfile.net/</option>
+                                    <option <?php echo $conf['cdnpublic'] == 3 ? 'selected ' : '' ?> value="3">360CDN - https://lib.baomitu.com/</option>
+                                    <option <?php echo $conf['cdnpublic'] == 4 ? 'selected ' : '' ?> value="4">BootCDN - https://cdn.bootcdn.net/ajax/libs/</option>
+                                    <option <?php echo $conf['cdnpublic'] == 5 ? 'selected ' : '' ?> value="5">今日头条CDN - https://s1.pstatp.com/cdn/expire-1-M/</option>
                                 </select>
                             </div>
                         </div>
@@ -125,7 +127,7 @@ $mod = isset($_GET['mod']) ? $_GET['mod'] : 'site';
                         <div class="form-group">
                             <label class="col-sm-2 control-label">页脚代码</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="footer" rows="2"><?php echo $conf['footer'] ?></textarea>
+                                <textarea class="form-control" name="footer" rows="2"><?php echo $conf['footer']; ?></textarea>
                             </div>
                         </div>
                         <div class="form-group">

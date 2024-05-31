@@ -95,13 +95,17 @@ if ($mod != 'api') {
 }
 
 if ($conf['cdnpublic'] == 1) {
-    $cdnpublic = 'https://lib.baomitu.com/';
+    $cdnpublic = 'https://cdn.staticfile.org/';
 } elseif ($conf['cdnpublic'] == 2) {
-    $cdnpublic = 'https://cdn.bootcdn.net/ajax/libs/';
+    $cdnpublic = 'https://cdn.staticfile.net/';
+} elseif ($conf['cdnpublic'] == 3) {
+    $cdnpublic = 'https://lib.baomitu.com/';
 } elseif ($conf['cdnpublic'] == 4) {
+    $cdnpublic = 'https://cdn.bootcdn.net/ajax/libs/';
+} elseif ($conf['cdnpublic'] == 5) {
     $cdnpublic = 'https://s1.pstatp.com/cdn/expire-1-M/';
 } else {
-    $cdnpublic = 'https://cdn.staticfile.org/';
+    $cdnpublic = $site_http . '/assets/';
 }
 
 $admin_islogin = 0;

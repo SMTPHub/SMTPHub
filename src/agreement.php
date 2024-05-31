@@ -18,8 +18,8 @@ include("./includes/common.php");
         <meta name="keywords" content="<?php echo $conf['keywords']?>">
         <meta name="description" content="<?php echo $conf['description']?>" />
 
-        <link href="<?php echo $cdnpublic?>twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-        <link href="<?php echo $cdnpublic?>font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="<?php echo $cdnpublic; ?>twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?php echo $cdnpublic; ?>font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
         <link href="./assets/css/site.css" rel="stylesheet">
         <style>
@@ -204,12 +204,12 @@ include("./includes/common.php");
                 <?php if ($conf['site_icp']) { ?><br /><a href="https://beian.miit.gov.cn/#/Integrated/index" class="nav-link" target="_blank"><?php echo $conf['site_icp'] ?></a><?php } ?>
 
             </p>
-            <?php echo $conf['footer'] ?>
+            <?php echo $conf['footer']; ?>
 
         </footer>
 
-        <script src="<?php echo $cdnpublic?>jquery/3.4.1/jquery.min.js"></script>
-        <script src="<?php echo $cdnpublic?>twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="<?php echo $cdnpublic; ?>jquery/1.12.4/jquery.min.js"></script>
+        <script src="<?php echo $cdnpublic; ?>twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
         
     </body>
 </html>

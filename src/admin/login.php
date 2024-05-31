@@ -45,8 +45,8 @@ if (isset($_POST['admin_user']) && isset($_POST['admin_pwd'])) {
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
     <title>管理员登录</title>
-    <link href="//cdn.staticfile.org/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="<?php echo $cdnpublic; ?>twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="<?php echo $cdnpublic; ?>font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <style>
 body{background:linear-gradient(to right,#49bdad,#6a67c7) fixed}
 .form-horizontal{background-color:#fff;text-align:center;padding:50px 30px 30px;box-shadow:12px 12px 0 0 rgba(0,0,0,.3);margin-top:50%}
@@ -85,8 +85,8 @@ body{background:linear-gradient(to right,#49bdad,#6a67c7) fixed}
             </div>
         </div>
     </div>
-    <script src="//cdn.staticfile.org/jquery/2.1.4/jquery.min.js"></script>
-    <script src="//cdn.staticfile.org/layer/3.1.1/layer.js"></script>
+    <script src="<?php echo $cdnpublic; ?>jquery/1.12.4/jquery.min.js"></script>
+    <script src="<?php echo $cdnpublic; ?>layer/3.1.1/layer.js"></script>
     <script>
         function doLogin(obj) {
             var ii = layer.load(2, {

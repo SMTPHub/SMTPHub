@@ -121,10 +121,10 @@
         <span class="guidance-desc">点击右上角<img src="<?php echo $site_url; ?>/assets/browseronly/more.png" class="icon-sgd"> or 复制网址自行打开</span>
     </div>
 
-    <script src="<?php echo $site_url; ?>/assets/js/jquery.min.js"></script>
-    <script src="<?php echo $site_url; ?>/assets/js/clipboard.min.js"></script>
+    <script src="<?php echo $cdnpublic; ?>jquery/1.12.4/jquery.min.js"></script>
+    <script src="<?php echo $cdnpublic; ?>clipboard.js/2.0.0/clipboard.min.js"></script>
     <a data-clipboard-text="<?php echo $site_uri; ?>" class="app-download-btn">点此复制本站网址</a>
-    <script src="<?php echo $site_url; ?>/assets/layer/layer.js"></script>
+    <script src="<?php echo $cdnpublic; ?>layer/3.1.1/layer.js"></script>
     <script type="text/javascript">
         new ClipboardJS(".app-download-btn");
     </script>

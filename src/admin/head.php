@@ -10,13 +10,13 @@ if (!defined('IN_CRONLITE')) return;
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title><?php echo $title; ?> - <?php echo $conf['title']; ?></title>
-    <link href="//cdn.staticfile.net/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="//cdn.staticfile.net/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="<?php echo $cdnpublic; ?>twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="<?php echo $cdnpublic; ?>/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="../assets/css/bootstrap-table.css" rel="stylesheet" />
-    <script src="//cdn.staticfile.net/modernizr/2.8.3/modernizr.min.js"></script>
-    <script src="//cdn.staticfile.net/jquery/2.1.4/jquery.min.js"></script>
-    <script src="//cdn.staticfile.net/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="//cdn.staticfile.net/layer/3.1.1/layer.js"></script>
+    <script src="<?php echo $cdnpublic; ?>modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="<?php echo $cdnpublic; ?>jquery/1.12.4/jquery.min.js"></script>
+    <script src="<?php echo $cdnpublic; ?>twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="<?php echo $cdnpublic; ?>layer/3.1.1/layer.js"></script>
     <!--[if lt IE 9]>
     <script src="//cdn.staticfile.net/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="//cdn.staticfile.net/respond.js/1.4.2/respond.min.js"></script>

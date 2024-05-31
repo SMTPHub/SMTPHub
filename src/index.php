@@ -3,9 +3,7 @@ $mod = isset($_GET['mod']) ? $_GET['mod'] : 'home';
 include("./includes/common.php");
 
 if($conf['homepage']==2){
-    echo '<html><frameset framespacing="0" border="0" rows="0" frameborder="0">
-    <frame name="main" src="'.$conf['homepage_url'].'" scrolling="auto" noresize>
-  </frameset></html>';
+  require_once ROOT. '/page/page-frame.php';
   exit;
 }elseif($conf['homepage']==1){
     require_once ROOT. '/page/page-blank.php';
@@ -28,8 +26,8 @@ if($conf['homepage']==2){
     <title><?php echo $conf['title']?></title>
     <link rel="shortcut icon" href="favicon.ico">
 
-    <link href="<?php echo $cdnpublic?>twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo $cdnpublic?>font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php echo $cdnpublic; ?>twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo $cdnpublic; ?>font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link href="./assets/css/site.css" rel="stylesheet">
 </head>
@@ -168,12 +166,12 @@ if($conf['homepage']==2){
             <?php if ($conf['site_icp']) { ?><br /><a href="https://beian.miit.gov.cn/#/Integrated/index" class="nav-link" target="_blank"><?php echo $conf['site_icp'] ?></a><?php } ?>
 
         </p>
-        <?php echo $conf['footer'] ?>
+        <?php echo $conf['footer']; ?>
 
     </footer>
 
-    <script src="<?php echo $cdnpublic?>jquery/3.4.1/jquery.min.js"></script>
-    <script src="<?php echo $cdnpublic?>twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="<?php echo $cdnpublic; ?>jquery/1.12.4/jquery.min.js"></script>
+    <script src="<?php echo $cdnpublic; ?>twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script>
     $(function(){
           $(document).scroll(function() {
