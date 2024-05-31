@@ -8,5 +8,7 @@
 
 .DS_Store
 install.lock
-*config.php*
+config*.php
 test/*
+*/cache/*
+*/vendor/*
