@@ -118,7 +118,7 @@ $checkupdate = 'https://smtphub.crogram.net/smtphub/update.php?ver=' . VERSION;
         <div class="panel panel-danger">
             <div class="list-group">
                 <div class="list-group-item">
-                    <span class="fa fa-trash fa-fw"></span> <b>数据清理：</b>
+                    <span class="fa fa-send fa-fw"></span> <b>快捷操作：</b>
                     <a href="javascript:cleanRecord(1)" class="btn btn-sm btn-danger">删除1天前的发送记录</a>&nbsp;&nbsp;
                     <a href="javascript:cleanRecord(30)" class="btn btn-sm btn-danger">删除30天前的发送记录</a>&nbsp;&nbsp;
                 </div>
@@ -167,9 +167,22 @@ $checkupdate = 'https://smtphub.crogram.net/smtphub/update.php?ver=' . VERSION;
                     </div>
                     <ul class="list-group text-dark">
                         <li class="list-group-item">当前版本：V<?php echo APP_VERSION;?> (Build <?php echo VERSION;?>)</li>
-                        <li class="list-group-item">Powered by <a href="https://crogram.com/" target="_blank" rel="noopener noreferrer">CROGRAM</a></li>
+                        <li class="list-group-item">Powered by <a href="https://crogram.org/" target="_blank" rel="noopener noreferrer">Crogram</a></li>
                     </ul>
                     <ul class="list-group text-dark" id="checkupdate"></ul>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">支持信息</h3>
+                    </div>
+                    <ul class="list-group text-dark">
+                        <li class="list-group-item">
+                            <a href="https://github.com/SMTPHub/SMTPHub" target="_blank">源码下载</a>，<a href="https://txc.qq.com/products/650791" target="_blank">交流反馈</a>
+                        </li>
+                        <li class="list-group-item">联系微信：jksdou</li>
+                        <li class="list-group-item">联系邮箱：jksdou@qq.com</li>
+                        <li class="list-group-item">联系ＱＱ：350430869</li>
+                    </ul>
                 </div>
             </div>
         </div>
