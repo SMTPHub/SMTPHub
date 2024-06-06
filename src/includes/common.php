@@ -9,9 +9,7 @@ define('IN_CRONLITE', true);
 define('SYSTEM_MODE', 'prod');
 define('SYSTEM_ROOT', dirname(__FILE__));
 define('ROOT', dirname(SYSTEM_ROOT));
-define('APP_VERSION', '1.1.4');
-define('VERSION', '1003');
-define('DB_VERSION', '1003');
+include SYSTEM_ROOT . '/version.php';
 date_default_timezone_set('Asia/Shanghai');
 $date = date("Y-m-d H:i:s");
 
@@ -77,9 +75,9 @@ $conf = getAllSetting();
 define('SYS_KEY', $conf['syskey']);
 $password_hash = '!@#%!s!0';
 
-if (!$conf['version'] || $conf['version'] < DB_VERSION) {
+if (empty($conf['db_version']) || $conf['db_version'] < DB_VERSION) {
     if (!$install) {
-        exit('请先完成网站升级！<a href="' . $site_http . '/install/update.php"><font color=red>点此升级</font></a>');
+        exit('请先完成数据库升级！<a href="' . $site_http . '/install/update.php"><font color=red>点此升级</font></a>');
     }
 }
 

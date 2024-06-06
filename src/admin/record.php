@@ -120,7 +120,7 @@ include './head.php';
     function viewEmail(id) {
         layer.open({
             type: 2,
-            area: ['60%', '500px'],
+            area: ['60%', '80%'],
             closeBtn: 2,
             title: '查看邮件内容',
             content: 'view.php?id=' + id
@@ -139,7 +139,7 @@ include './head.php';
         //         if (data.code == 0) {
         //             layer.open({
         //                 type: 1,
-        //                 area: ['100%'],
+        //                 area: ['60%', '80%'],
         //                 closeBtn: 2,
         //                 title: '查看邮件内容',
         //                 content: data.data.mail_body

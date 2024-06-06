@@ -27,21 +27,29 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
 $db->exec("set sql_mode = ''");
 $db->exec("set names utf8");
 
-$version = 0;
-if ($rs = $db->query("SELECT v FROM pre_config WHERE k='version'")) {
-    $version = $rs->fetchColumn();
+$db_version = 0;
+if ($rs = $db->query("SELECT v FROM pre_config WHERE k='db_version'")) {
+    $db_version = $rs->fetchColumn();
 }
 
-if ($version < 1003) {
-    $sqls = file_get_contents('update.sql');
+if (!$db_version || $db_version < 1003) {
+    $sqls = file_get_contents('update_1003.sql');
     $sqls = explode(';', $sqls);
     $sqls[] = "REPLACE INTO `pre_config` VALUES ('version', '1003')";
-    if (!$db->query("SELECT v FROM pre_config WHERE k='syskey'")->fetchColumn()) {
-        $sqls[] = "REPLACE INTO `pre_config` VALUES ('syskey', '" . random(32) . "')";
-    }
+    $sqls[] = "REPLACE INTO `pre_config` VALUES ('db_version', '1003')";
+} else if (!$db_version || $db_version < 1004) {
+    $sqls = file_get_contents('update_1004.sql');
+    $sqls = explode(';', $sqls);
+    $sqls[] = "REPLACE INTO `pre_config` VALUES ('version', '1004')";
+    $sqls[] = "REPLACE INTO `pre_config` VALUES ('db_version', '1004')";
+    // 更新系统key
+    // if (!$db->query("SELECT v FROM pre_config WHERE k='syskey'")->fetchColumn()) {
+    //     $sqls[] = "REPLACE INTO `pre_config` VALUES ('syskey', '" . random(32) . "')";
+    // }
 } else {
     exit('你的网站已经升级到最新版本了');
 }
+
 $success = 0;
 $error = 0;
 $errorMsg = null;

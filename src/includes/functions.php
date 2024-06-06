@@ -356,13 +356,13 @@ function get_main_host($url)
     return $host;
 }
 
-function _get($field = '', $default = '')
+function _get($field = '', $default = '', $trim = false)
 {
     if (!$field) {
         // return $_GET;
         $kv = array();
         foreach ($_POST as $k => $v) {
-            $kv[$k] = trim(htmlspecialchars($v));
+            $kv[$k] = $trim ? trim(htmlspecialchars($v)) : htmlspecialchars($v);
         }
         return $kv;
     }
@@ -370,7 +370,7 @@ function _get($field = '', $default = '')
         return $default ? $default : false;
     }
     if (is_string($_GET[$field])) {
-        return trim(htmlspecialchars($_GET[$field]));
+        return $trim ? trim(htmlspecialchars($_GET[$field])) : htmlspecialchars($_GET[$field]);
     }
     return $_GET[$field];
 }
@@ -451,24 +451,21 @@ function send_mail($config, $detail = array())
         $reply_to   = isset($detail['reply_to']) ? $detail['reply_to'] : '';
         $reply_name = isset($detail['reply_name']) ? $detail['reply_name'] : '';
         $subject    = $detail['subject'];
-        $body       = $detail['message'];
         $mailtype   = 'HTML'; // HTML/TXT
+        $body       = ($mailtype == 'HTML') ? urldecode($detail['message']) : $detail['message'];
 
+        $smtp = new \lib\MailSMTP($config['smtp_host'], $config['smtp_username'], $config['smtp_password'], $config['smtp_port']);
+        $res = $smtp->sendmail($from, $to, $subject, urldecode($body), $to_name, $from_name, $mailtype, '', '', $reply_to, $reply_name);
+        global $DB;
         $emails_log = array(
             'appid'        => $detail['appid'],
             'smtp_id'      => $config['id'],
             'mail_subject' => $subject,
             'mail_from'    => $from,
             'mail_to'      => $to,
-            'mail_body'    => $body,
+            'mail_body'    => $detail['message'],
             'mail_date'    => date('Y-m-d H:i:s'),
         );
-        // print_r($emails_log);
-        // $DB->update('record', ['status' => 1], ['smtp_id' => 5]);
-
-        $smtp = new \lib\MailSMTP($config['smtp_host'], $config['smtp_username'], $config['smtp_password'], $config['smtp_port']);
-        $res = $smtp->sendmail($from, $to, $subject, $body, $to_name, $from_name, $mailtype, '', '', $reply_to, $reply_name);
-        global $DB;
         if (!$res) {
             $emails_log['status'] = 0;
             $DB->insert('record', $emails_log);

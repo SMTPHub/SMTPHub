@@ -63,6 +63,12 @@ POST 参数说明
 | reply_to   | 可选 | service@email-server.com         | 回信地址                                                     |
 | reply_name | 可选 | 【客户服务部】                   | 回信地址名称（当设置回信地址时才生效），未设置时，替换为发信人名称 |
 
+注意：邮件正文使用 HTML 的，需要 encode 对邮件正文编码后再提交，
+
+JS 中使用 encodeURIComponent()
+
+PHP 中使用 urlencode()
+
 接口请求 JSON 示例
 
 ```json

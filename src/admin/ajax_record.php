@@ -15,6 +15,7 @@ switch ($act) {
         $id = intval($_GET['id']);
         $row = $DB->find('record', '*', ['id' => $id]);
         if (!$row) exit('{"code":-1,"msg":"记录不存在"}');
+        $row['mail_body'] = urldecode($row['mail_body']);
         exit(json_encode(['code' => 0, 'data' => $row]));
         break;
     case 'list':
